@@ -13,7 +13,7 @@ var gameModule = (function () {
 		canvas.width = 480;
 		canvas.height = 320;
 
-		ctx.fillStyle = 'black';
+		ctx.fillStyle = '#9acd32';
 		ctx.beginPath();
 		ctx.arc(ballX,ballY,ballR, 0, Math.PI * 2 , true);
 		ctx.fill();
