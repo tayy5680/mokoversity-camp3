@@ -1,6 +1,7 @@
+/*jslint browser: true, devel: true, closure: true */
 
 var gameModule = (function () {
-
+	"use strict"
 
 	var timeoutVar,
 		counter = 0,
