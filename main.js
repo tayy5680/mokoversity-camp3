@@ -2,7 +2,13 @@
 var gameModule = (function () {
 
 	var timeoutVar,
-		counter = 0;
+		counter = 0,
+		ballX,
+		ballY,
+		ballR;
+
+	var colors = ['#ff0000', '#0000ff', 'yellow'];
+	var length = colors.length;
 
 
 function touchEvent(evt){
@@ -11,6 +17,11 @@ function touchEvent(evt){
 
 
 	console.log("Clicked: " + x + " , " + y);
+
+	var tmp = (ballX - x) * (ballX - x) + (ballY - y) * (ballY - y);
+
+	if (tmp < ballR*ballR)
+		console.log("Goodjob!")
 }
 
 
@@ -24,22 +35,23 @@ function touchEvent(evt){
 		var canvas = document.getElementById('game');
 		var ctx = canvas.getContext('2d');
 
-		var ballX = Math.floor(Math.random() * 300)//0..300
-		var ballY = Math.floor(Math.random() * 500)
-		var ballR = Math.floor(Math.random() * 100)
+		ballX = Math.floor(Math.random() * 600)//0..600
+		ballY = Math.floor(Math.random() * 450)
+		ballR = Math.floor(Math.random() * 80)
 
-		canvas.width = 480;
-		canvas.height = 320;
+		canvas.width = 640;
+		canvas.height = 480;
 
-		ctx.fillStyle = '#9acd32';
+		ctx.fillStyle = colors[counter % length];
 		ctx.beginPath();
 		ctx.arc(ballX,ballY,ballR, 0, Math.PI * 2 , true);
 		ctx.fill();
 
 		if (counter >= 10000){
+			gameOver();
 
 		} else{
-			timeoutVar = setTimeout(start,1000);
+			timeoutVar = setTimeout(start,2000);
 			counter = counter + 1;
 
 			console.log("counter:"+counter);
