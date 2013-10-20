@@ -1,6 +1,6 @@
 /*jslint browser: true, devel: true, closure: true */
 
-var gameModule = (function () {
+var gameModule = (function (document, $) {
 
     "use strict";
 
@@ -9,11 +9,19 @@ var gameModule = (function () {
         ballY,
         ballR,
         scores,
-        colors = ['#8b008b', '#00008b', '#f0f8ff'],
+        colors = ['#E35553', '#f0f8ff'],
         length = colors.length;
 
     function gameOver() {
         console.log("Final:" + scores);
+        var canvas = document.getElementById('game'),
+            ctx = canvas.getContext('2d');
+            canvas.width = 640;
+            canvas.height = 480;
+
+        var api = "http://127.0.0.1:3000/scores?scores=" + scores;
+
+        $.ajax({ url: api});
     }
 
     function startGame() {
@@ -32,10 +40,10 @@ var gameModule = (function () {
         ctx.arc(ballX, ballY, ballR, 0, Math.PI * 2, true);
         ctx.fill();
 
-        if (counter >= 10000) {
+        if (counter >= 1000) {
             gameOver();
         } else {
-            setTimeout(startGame, 2000);
+            setTimeout(startGame, 100);
             counter = counter + 1;
         }
     }
@@ -64,6 +72,6 @@ var gameModule = (function () {
         start : start
     };
 
-}(document));
+}(document, $));
 
 gameModule.start();
