@@ -9,11 +9,15 @@ var gameModule = (function (document, $) {
         ballY,
         ballR,
         scores,
-        colors = ['#8b008b', '#00008b', '#f0f8ff'],
+        colors = ['#E35553', '#f0f8ff'],
         length = colors.length;
 
     function gameOver() {
         console.log("Final:" + scores);
+        var canvas = document.getElementById('game'),
+            ctx = canvas.getContext('2d');
+            canvas.width = 640;
+            canvas.height = 480;
 
         var api = "http://127.0.0.1:3000/scores?scores=" + scores;
 
@@ -36,10 +40,10 @@ var gameModule = (function (document, $) {
         ctx.arc(ballX, ballY, ballR, 0, Math.PI * 2, true);
         ctx.fill();
 
-        if (counter >= 5) {
+        if (counter >= 10000000) {
             gameOver();
         } else {
-            setTimeout(startGame, 1000);
+            setTimeout(startGame, 300);
             counter = counter + 1;
         }
     }

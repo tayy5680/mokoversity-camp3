@@ -40,10 +40,10 @@ var gameModule = (function (document, $) {
         ctx.arc(ballX, ballY, ballR, 0, Math.PI * 2, true);
         ctx.fill();
 
-        if (counter >= 1000) {
+        if (counter >= 10000000) {
             gameOver();
         } else {
-            setTimeout(startGame, 100);
+            setTimeout(startGame, 300);
             counter = counter + 1;
         }
     }
