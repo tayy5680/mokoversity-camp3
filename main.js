@@ -1,32 +1,39 @@
 
 var gameModule = (function () {
 
+
 	var timeoutVar,
 		counter = 0,
 		ballX,
 		ballY,
-		ballR;
+		ballR,
+		scores;
 
-	var colors = ['#ff0000', '#0000ff', 'yellow'];
+	var colors = ['#8b008b', '#00008b', '#f0f8ff'];
 	var length = colors.length;
 
 
 function touchEvent(evt){
 	var x = evt.clientX,
-		y =  evt.clienty;
+		y = evt.clientY;
 
 
 	console.log("Clicked: " + x + " , " + y);
 
 	var tmp = (ballX - x) * (ballX - x) + (ballY - y) * (ballY - y);
 
-	if (tmp < ballR*ballR)
+	if (tmp < ballR*ballR) {
+
+		scores = scores + (100 - ballR);
 		console.log("Goodjob!")
+	}
 }
 
 
 
 	function start() {
+		scores = 0
+
 		document.getElementById("main").addEventListener("click", touchEvent, false);
 		startGame();
 	}
@@ -54,12 +61,13 @@ function touchEvent(evt){
 			timeoutVar = setTimeout(start,2000);
 			counter = counter + 1;
 
-			console.log("counter:"+counter);
+			
 		}
-
-
-
 	}
+	function gameOver() {
+		console.log("Final:"+scores);
+	}
+
 	return{
 		start:start
 	}
