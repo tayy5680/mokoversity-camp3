@@ -1,8 +1,26 @@
 
 var gameModule = (function () {
+
 	var timeoutVar,
 		counter = 0;
+
+
+function touchEvent(evt){
+	var x = evt.clientX,
+		y =  evt.clienty;
+
+
+	console.log("Clicked: " + x + " , " + y);
+}
+
+
+
 	function start() {
+		document.getElementById("main").addEventListener("click", touchEvent, false);
+		startGame();
+	}
+
+	function startGame() {
 		var canvas = document.getElementById('game');
 		var ctx = canvas.getContext('2d');
 
@@ -18,7 +36,7 @@ var gameModule = (function () {
 		ctx.arc(ballX,ballY,ballR, 0, Math.PI * 2 , true);
 		ctx.fill();
 
-		if (counter >= 10){
+		if (counter >= 10000){
 
 		} else{
 			timeoutVar = setTimeout(start,1000);
